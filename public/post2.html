@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<p>send post: "Content-Type","application/json" </p>
+	<script>
+
+	/* post method 2  */
+	/* "Content-Type","application/json" */
+
+
+		function postInfo(url,data,cb){
+			var r = new XMLHttpRequest();
+			r.open('POST',url,true);
+
+			r.setRequestHeader("Content-Type","application/json");
+			r.onreadystatechange = function(){
+				if(r.readyState === 4 && r.status === 200 ){
+					var type = r.getResponseHeader("Content-Type");
+					if(type.match(/^text/))
+						cb(r.responseText);
+				}
+			};
+			r.send(JSON.stringify(data));
+		}
+
+		var data = {name:"hello world"};
+		
+		postInfo('/users',data,fn);
+		function fn(data){
+			console.log("return: "+ data);
+		}
+	</script>
+</body>
+</html>

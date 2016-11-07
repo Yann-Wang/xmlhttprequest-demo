@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<p>send get: parse response data</p>
+	<script>
+		function getData(url,cb){
+			var r = new XMLHttpRequest();
+			r.open("GET",url);
+			r.onreadystatechange = function(){
+				if(r.readyState === 4 && r.status === 200){
+					var type = r.getResponseHeader("Content-Type");
+					if(type.indexOf("xml") !== -1 && r.responseXML)
+						cb(r.responseXML);
+					else if(type === "application/json")
+						cb(JSON.parse(r.responseText));
+					else
+						cb(r.responseText);
+				}
+			};
+
+			r.send(null);
+		}
+
+		getData("/users/getdata",fn);
+		function fn(data){
+			console.log("return : " + data);
+		}
+	</script>
+	
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<p>send post: Content-Type: multipart/form-data </p>
+	<script>
+
+	/* post method 3  */
+	/* Content-Type: multipart/form-data */
+		function postFormData(url,data,cb){
+			if(typeof FormData === "undefined")
+				throw new Error("FormData is not implemented");
+
+			var r = new XMLHttpRequest();
+			r.open("POST",url);
+			r.onreadystatechange = function(){
+				if(r.readyState === 4 && r.status == 200){
+					cb(r.responseText);
+				}				
+			};
+
+			var formdata = new FormData();
+			var value;
+			for(var name in data){
+				if(!data.hasOwnProperty(name))
+					continue;
+				value = data[name];
+				if(typeof value === "function")
+					continue;
+
+				formdata.append(name,value);
+			}
+			//r.setRequestHeader("Content-Type","multipart/form-data");//will be added automitically
+			r.send(formdata);
+		}
+
+
+		var url ="/users/formdata";
+		var data = {name: "hello world!"};
+		function fn(text){
+			console.log("return: " + text);
+		}
+
+		postFormData(url,data,fn);
+
+
+
+
+
+		
+	</script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<p>send get: check the responseText</p>
+	<script>
+		function getText(url,cb){
+			var r = new XMLHttpRequest();
+			r.open("GET",url);
+			r.onreadystatechange = function(){
+				if(r.readyState === 4 && r.status === 200){
+					var type = r.getResponseHeader("Content-Type");
+					if(type.match(/^text/)){
+						cb(r.responseText);
+					}
+				}
+			};
+
+			r.send(null);
+		}
+
+		getText("/users/getdata",fn);
+		function fn(data){
+			console.log("return: " + data);
+		}
+	</script>
+	
+</body>
+</html>

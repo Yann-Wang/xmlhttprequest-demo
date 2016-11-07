@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<p>send post: "Content-Type","application/x-www-form-urlencoded" </p>
+	<script>
+
+		/* post method 1  */
+		/* "Content-Type","application/x-www-form-urlencoded" */
+
+		function encodeFormData(data){
+			if(!data)
+				return "";
+			var pairs = [];
+			for(var name in data){
+				if(!data.hasOwnProperty(name))
+					continue;
+				if(typeof data[name] === "function")
+					continue;
+				var value = data[name].toString();
+				name = encodeURIComponent(name.replace("%20","+"));
+				value = encodeURIComponent(value.replace("%20","+"));
+				pairs.push(name + "=" + value);
+			}
+			return pairs.join('&');
+		}
+
+
+		function postInfo(url,data,cb){
+			var r = new XMLHttpRequest();
+			r.open('POST',url,true);
+
+			r.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+			r.onreadystatechange = function(){
+				if(r.readyState === 4 && r.status === 200 ){
+					var type = r.getResponseHeader("Content-Type");
+					if(type.match(/^text/))
+						cb(r.responseText);
+				}
+			};
+			r.send(encodeFormData(data));
+		}
+
+		var data = {name:"hello world"};
+		
+		postInfo('/users',data,fn);
+		function fn(data){
+			console.log("return: "+ data);
+		}
+	</script>
+</body>
+</html>
