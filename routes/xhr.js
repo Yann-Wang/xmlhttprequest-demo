@@ -41,13 +41,13 @@ router.get('/getdata',function(req,res,next){
 
 
 /* four post method response function */
-router.post('/', function(req, res, next) {
+router.post('/post1_2', function(req, res, next) {
   console.log(req.body);
   res.set("Content-Type","text/plain");
   res.send("post data");
 });
 
-router.post('/formdata', function(req, res, next) {
+router.post('/post3_4', function(req, res, next) {
   postFormData(req,res);
   // res.set("Content-Type","text/plain");
   // res.send("got it!");
