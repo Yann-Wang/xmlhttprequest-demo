@@ -110,6 +110,17 @@ module.exports = router;
 
 ```
 
+### the module for parsing data
+- the body-parser module in Express can provides the following parsers:
+	- JSON body parser
+	- Raw body parser
+	- Text body parser
+	- URL-encoded form body parser
+- for multipart bodies, the best option is listed as follows:
+	- formidable
+	- multer
+
+
 ### GET request
 - demo1: access http://localhost:3000/xhr/get1
 ```html
