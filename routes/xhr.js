@@ -51,13 +51,16 @@ router.post('/post1_2', function(req, res, next) {
   res.send("post data");
 });
 
-router.post('/post3_4_5', function(req, res, next) {
-  postFormData(req,res);
-  // res.set("Content-Type","text/plain");
-  // res.send("got it!");
+
+router.post('/postdata4', function(req, res, next) {
+	postFormData(req,res,true);
 });
 
-function postFormData(req, res) {
+router.post('/post3_4_5', function(req, res, next) {
+  postFormData(req,res);
+});
+
+function postFormData(req, res, isPost4) {
 	if (!isFormData(req)) {
 		//res.statusCode = 400;
 		res.sendStatus(400); //Bad Request!
@@ -85,6 +88,10 @@ function postFormData(req, res) {
 	});
 
 	form.on('end', function() {
+		if(isPost4){
+			res.sendFile(path.join(__dirname, '../public/upload_succ.html'));
+			return;
+		}
 		res.set("Content-Type","text/plain");
 		res.send("got it!");
 	});
