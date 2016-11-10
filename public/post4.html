@@ -6,9 +6,11 @@
 </head>
 <body>
 	<p>form input file</p>
-	<p>because of the absent of the callback, browser will redict to '/users/formdata' and show the responseText to this page when responseText get back</p>
+	<p>because of the absent of the callback, browser will redict to
+		'/users/post3_4' and show the responseText to this page
+		when responseText get back</p>
 
-	<form method="post" action="/xhr/post3_4" enctype="multipart/form-data">
+	<form method="post" action="/xhr/post3_4_5" enctype="multipart/form-data">
 		<label for="cntname">name: </label>
 		<input type="text" name="name" id="cntname" />
 		<br />
@@ -18,62 +20,9 @@
 		<input type="submit" value="upload" id="_submit" />
 	</form>
 
-	<div id="_progress"></div>
+
 
 	<!-- because of the absent of the callback, browser will redict to /users/formdata and show the responseText to this page when responseText get back-->
-	<script>
-		var _submit = document.getElementById('_submit'),
-				_file = document.getElementById('filename'),
-				_progress = document.getElementById('_progress');
 
-		var upload = function(e){
-
-			if(e.preventDefault)
-				e.preventDefault();
-			e.returnValue = false;
-
-			if(e.stopPropagation)
-				e.stopPropagation();
-			e.cancelBubble = true;
-
-			if(_file.files.length === 0){
-				return;
-			}
-
-			var data = new FormData();
-			data.append('file', _file.files[0]);
-
-			var request = new XMLHttpRequest();
-			request.open('POST', '/xhr/post3_4');
-
-			request.onreadystatechange = function(){
-				if(request.readyState == 4){
-
-					console.log(request.responseText);
-
-				}
-			};
-			/*
-			 request.upload.addEventListener('progress', function(e){
-			 _progress.style.width = Math.ceil(e.loaded/e.total * 100) + '%';
-			 }, false);
-			 */
-			request.upload.onprogress = function(e) {
-				if (e.lengthComputable) {
-
-					_progress.innerHTML = Math.round(e.loaded/e.total*100) + "% Complete";
-				}
-			};
-
-			request.upload.onload = function(){
-				console.log("upload succ");
-			};
-
-
-			request.send(data);
-		};
-
-		_submit.addEventListener('click', upload);
-	</script>
 </body>
 </html>

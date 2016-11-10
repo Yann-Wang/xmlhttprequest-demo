@@ -31,6 +31,10 @@ router.get('/post4', function(req, res, next) {
   res.sendFile(path.join(__dirname, '../public/post4.html'));
 });
 
+router.get('/post5', function(req, res, next) {
+	res.sendFile(path.join(__dirname, '../public/post5.html'));
+});
+
 /* two get method response function */
 
 router.get('/getdata',function(req,res,next){
@@ -47,7 +51,7 @@ router.post('/post1_2', function(req, res, next) {
   res.send("post data");
 });
 
-router.post('/post3_4', function(req, res, next) {
+router.post('/post3_4_5', function(req, res, next) {
   postFormData(req,res);
   // res.set("Content-Type","text/plain");
   // res.send("got it!");

@@ -387,9 +387,45 @@ module.exports = router;
 </head>
 <body>
 	<p>form input file</p>
-	<p>because of the absent of the callback, browser will redict to '/users/formdata' and show the responseText to this page when responseText get back</p>
+	<p>because of the absent of the callback, browser will redict to
+		'/users/post3_4' and show the responseText to this page
+		when responseText get back</p>
 
-	<form method="post" action="/xhr/post3_4" enctype="multipart/form-data">
+	<form method="post" action="/xhr/post3_4_5" enctype="multipart/form-data">
+		<label for="cntname">name: </label>
+		<input type="text" name="name" id="cntname" />
+		<br />
+		<label for="filename">filename: </label>
+		<input type="file" name="file" id="filename" />
+		<br />
+		<input type="submit" value="upload" id="_submit" />
+	</form>
+
+
+
+	<!-- because of the absent of the callback, browser will redict to /users/formdata and show the responseText to this page when responseText get back-->
+
+</body>
+</html>
+
+
+```
+
+
+- demo5: access http://localhost:3000/xhr/post5
+```html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<p>form upload file</p>
+	<p>add upload progress bar</p>
+
+	<form method="post" action="/xhr/post3_4_5" enctype="multipart/form-data">
 		<label for="cntname">name: </label>
 		<input type="text" name="name" id="cntname" />
 		<br />
@@ -425,7 +461,7 @@ module.exports = router;
 			data.append('file', _file.files[0]);
 
 			var request = new XMLHttpRequest();
-			request.open('POST', '/xhr/post3_4');
+			request.open('POST', '/xhr/post3_4_5');
 
 			request.onreadystatechange = function(){
 				if(request.readyState == 4){
@@ -459,9 +495,7 @@ module.exports = router;
 </body>
 </html>
 
-
 ```
-
 
 ### licence
 MIT
