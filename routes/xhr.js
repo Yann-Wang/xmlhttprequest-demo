@@ -82,7 +82,7 @@ function postFormData(req, res) {
 
 	form.on('end', function() {
 		res.set("Content-Type","text/plain");
-  		res.send("got it!");
+		res.send("got it!");
 	});
 
 	form.parse(req);

@@ -3,13 +3,18 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
+    <style>
+
+    </style>
 </head>
 <body>
 	<p>send post: Content-Type: multipart/form-data </p>
+    <div id="_progress"></div>
 	<script>
 
 	/* post method 3  */
 	/* Content-Type: multipart/form-data */
+	var _progress = document.getElementById("_progress");
 		function postFormData(url,data,cb){
 			if(typeof FormData === "undefined")
 				throw new Error("FormData is not implemented");
@@ -33,6 +38,18 @@
 
 				formdata.append(name,value);
 			}
+
+			r.upload.onprogress = function(e){
+				if(e.lengthComputable){
+				    _progress.innerHTML = Math.round(e.loaded/e.total*100) + "% Complete";
+                }
+			};
+
+			r.upload.onload = function(){
+			    console.log("upload succ");
+            };
+
+
 			//r.setRequestHeader("Content-Type","multipart/form-data");//will be added automitically
 			r.send(formdata);
 		}
