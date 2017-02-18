@@ -388,10 +388,10 @@ module.exports = router;
 <body>
 	<p>form input file</p>
 	<p>because of the absent of the callback, browser will redict to
-		'/users/post3_4' and show the responseText to this page
+		'/xhr/postdata4' and show the responseText to this page
 		when responseText get back</p>
 
-	<form method="post" action="/xhr/post3_4_5" enctype="multipart/form-data">
+	<form method="post" action="/xhr/postdata4" enctype="multipart/form-data">
 		<label for="cntname">name: </label>
 		<input type="text" name="name" id="cntname" />
 		<br />
@@ -400,10 +400,6 @@ module.exports = router;
 		<br />
 		<input type="submit" value="upload" id="_submit" />
 	</form>
-
-
-
-	<!-- because of the absent of the callback, browser will redict to /users/formdata and show the responseText to this page when responseText get back-->
 
 </body>
 </html>
@@ -437,7 +433,6 @@ module.exports = router;
 
 	<div id="_progress"></div>
 
-	<!-- because of the absent of the callback, browser will redict to /users/formdata and show the responseText to this page when responseText get back-->
 	<script>
 		var _submit = document.getElementById('_submit'),
 				_file = document.getElementById('filename'),
