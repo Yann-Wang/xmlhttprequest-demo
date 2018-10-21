@@ -35,6 +35,10 @@ router.get('/post5', function(req, res, next) {
 	res.sendFile(path.join(__dirname, '../public/post5.html'));
 });
 
+router.get('/upload_preview', function(req, res, next) {
+	res.sendFile(path.join(__dirname, '../public/upload_preview.html'));
+});
+
 /* two get method response function */
 
 router.get('/getdata',function(req,res,next){
